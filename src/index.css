@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-primary: "Rubik", system-ui, sans-serif;
+  --font-secondary: "Nunito", system-ui, sans-serif;
+  --primary-color: #96A78D;
+  --secondary-color: #A59D84;
+  --primary-bg: #96A78D;
+  --secondary-bg: hsla(45, 15%, 58%, 25%);
+  --text-primary: #595959;
+  --text-secondary: #808080;
+}
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: var(--text-primary);
+  background-color: #ffffff;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* padding: 1rem; */
+
+}
+
+.default-box-shadow {
+  box-shadow: 0 2px 8 0 hsla(0, 0%, 0%, 0.15);
+}
+
+@media only screen and (max-width: 600px) {}
