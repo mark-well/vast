@@ -37,10 +37,11 @@ function Block({ children, type, title, items }) {
             return (
                 <>
                     <div className={`${styles.block} ${styles.listBlock}`} style={randomBgColor}>
-                        {title ? <h2 className={`${styles.title}`}>{title}</h2> : null}                        <ol>
+                        {title ? <h2 className={`${styles.title}`}>{title}</h2> : null}
+                        <ol>
                             {
                                 items.map((item) => (
-                                    <li>{item}</li>
+                                    <li key={item}>{item}</li>
                                 ))
                             }
                         </ol>
@@ -55,7 +56,7 @@ function Block({ children, type, title, items }) {
                         <ul>
                             {
                                 items.map((item) => (
-                                    <li>{item}</li>
+                                    <li key={item}>{item}</li>
                                 ))
                             }
                         </ul>

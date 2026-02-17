@@ -21,28 +21,29 @@ function Tabs({ className, subjectId }) {
                 <div className={`${styles.tabsHeader}`}>
                     {
                         modules.map(tab => (
-                            <Button className={`${styles.tabs} ${activeTab === tab.id ? `${styles.activeTab}` : ""}`} onClick={() => setActiveTab(tab.id)}>{tab.name}</Button>
+                            <Button key={tab.id} className={`${styles.tabs} ${activeTab === tab.id ? `${styles.activeTab}` : ""}`} onClick={() => setActiveTab(tab.id)}>{tab.name}</Button>
                         ))
                     }
-                    <Button className={`${styles.addModuleButton}`} onClick={newModule} icon={<FontAwesomeIcon icon="fa-solid fa-plus" />}></Button>
+                    <Button className={`${styles.addModuleButton} text-white`} onClick={newModule} icon={<FontAwesomeIcon icon="fa-solid fa-plus" />}></Button>
                 </div>
 
+                {/* Tab Container */}
                 <div className={`${styles.tabContentContainer}`}>
                     {
                         modules.find(tab => tab.id === activeTab)?.contents.map(block => {
                             if (block.block_type == "paragraph") {
                                 return (
-                                    <Block type={block.block_type} title={block.title || ""}>
+                                    <Block key={block.id} type={block.block_type} title={block.title || ""}>
                                         <p>{block.content}</p>
                                     </Block>
                                 )
                             } else if (block.block_type == "orderedList") {
                                 return (
-                                    <Block type="orderedList" title={block.title} items={block.content}></Block>
+                                    <Block key={block.id} type="orderedList" title={block.title} items={block.content}></Block>
                                 )
                             } else if (block.block_type == "unorderedList") {
                                 return (
-                                    <Block type="unorderedList" title={block.title} items={block.content}></Block>
+                                    <Block key={block.id} type="unorderedList" title={block.title} items={block.content}></Block>
                                 )
                             }
                             return null

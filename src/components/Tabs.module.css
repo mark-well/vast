@@ -16,6 +16,11 @@
     overflow: hidden;
     text-overflow: ellipsis;
     min-width: 8rem;
+    transition: all 50ms ease-out;
+}
+
+.tabs:hover {
+    box-shadow: 0 2px 8px 0px hsla(0, 0%, 0%, 15%);
 }
 
 .addModuleButton {

@@ -30,7 +30,7 @@
 }
 
 .default-box-shadow {
-  box-shadow: 0 2px 8 0 hsla(0, 0%, 0%, 0.15);
+  box-shadow: 0 2px 8px 0px hsla(0, 0%, 0%, 15%);
 }
 
 @media only screen and (max-width: 600px) {}

@@ -1,0 +1,13 @@
+.notesHeaderWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.notesArea {
+    border-top: 1.5px solid hsla(0, 0%, 0%, 60%);
+    width: 100%;
+    height: 90%;
+    resize: none;
+    outline: transparent;
+    padding-top: 1rem;
+}

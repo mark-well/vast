@@ -1,0 +1,21 @@
+.tooltip {
+    min-width: 10rem;
+    background-color: white;
+    position: absolute;
+    right: 1rem;
+    top: 3rem;
+    color: var(--text-primary);
+}
+
+.tooltip button {
+    width: 100%;
+    text-align: left;
+}
+
+.tooltip li {
+    padding: 0.4rem 1rem;
+}
+
+.tooltip li:hover {
+    background-color: var(--secondary-bg);
+}
