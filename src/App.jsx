@@ -6,6 +6,7 @@ import GenerateReviewer from './views/GenerateReviewer'
 import Subject from './views/Subject'
 import FlashCard from './views/FlashCard'
 import Notes from './views/Annotation/Notes'
+import About from './views/About'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
           <Route path='/subject/:id' element={<Subject />} />
           <Route path='/subject/:id/flashcard' element={<FlashCard />} />
           <Route path='/subject/:id/notes' element={<Notes />} />
+          <Route path='/about' element={<About />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -31,7 +31,7 @@ export function SubjectProvider({ children }) {
                         {
                             "id": 2,
                             "block_type": "paragraph",
-                            "title": "This is a f*cking title",
+                            "title": "This is a title",
                             "content": "This is a paragraph with a title or a heading"
                         },
                         {

@@ -28,9 +28,11 @@
 }
 
 .buttonNavigation {
-    color: hsl(0, 100%, 100%);
-    background-color: var(--primary-color);
+    /* color: hsl(0, 100%, 100%); */
+    /* background-color: var(--primary-color); */
     font-size: 1rem;
     font-weight: 500;
-    padding: 0.5rem;
+    width: 100%;
+    display: inline-block;
+    /* padding: 0.5rem; */
 }
