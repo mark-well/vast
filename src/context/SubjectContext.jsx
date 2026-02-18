@@ -1,14 +1,23 @@
-import { createContext, useEffect, useState } from "react"
+import { createContext, useEffect, useMemo, useState } from "react"
 import { addModule, addSuject, dbDeleteModule, dbDeleteSubject, dbUpdateNotes, getSubjects } from "../db/db";
 
 export const SubjectContext = createContext();
 
 export function SubjectProvider({ children }) {
     const [subjects, setSubject] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         loadSubjects();
     }, []);
+
+    const filteredItems = useMemo(() => {
+        if (!searchQuery) return subjects;
+
+        return subjects.filter(subject =>
+            subject.title.toLowerCase().includes(searchQuery.toLocaleLowerCase())
+        );
+    });
 
     async function loadSubjects() {
         const data = await getSubjects();
@@ -163,7 +172,9 @@ export function SubjectProvider({ children }) {
             addNewModuleToSubject,
             deleteSubject,
             deleteModule,
-            updateNotes
+            updateNotes,
+            filteredItems,
+            setSearchQuery
         }}>
             {children}
         </SubjectContext.Provider>
