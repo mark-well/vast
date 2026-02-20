@@ -6,7 +6,7 @@
   --font-secondary: "Nunito", system-ui, sans-serif;
   --primary-color: #96A78D;
   --secondary-color: #A59D84;
-  --primary-bg: #96A78D;
+  --primary-bg: hsla(99.23, 12.87%, 60.39%, 25%);
   --secondary-bg: hsla(45, 15%, 58%, 25%);
   --text-primary: #595959;
   --text-secondary: #808080;

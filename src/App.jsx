@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './views/Home'
 import GenerateReviewer from './views/GenerateReviewer'
 import Subject from './views/Subject'
-import FlashCard from './views/FlashCard'
+import FlashCard from './views/Flashcard/FlashCard'
 import Notes from './views/Annotation/Notes'
 import About from './views/About'
 

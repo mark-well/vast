@@ -29,7 +29,7 @@ function TooltipSubject({ className }) {
             <div className={`${styles.tooltip} default-box-shadow ${className || ''}`}>
                 <ul>
                     <li><Button onClick={gotoNotes}>Notes</Button></li>
-                    <li><Button onClick={gotoFlashcard}>Flascards</Button></li>
+                    <li><Button onClick={gotoFlashcard}>Flashcards</Button></li>
                     <li><Button>Text to Speech</Button></li>
                 </ul>
             </div>
