@@ -2,7 +2,7 @@
 import styles from "./Button.module.css"
 import { Link } from 'react-router-dom'
 
-function Button({ children, icon, to, onClick, className }) {
+function Button({ children, icon, to, onClick, className, type, disabled }) {
 
     if (to && children && icon) {
         return (
@@ -33,7 +33,7 @@ function Button({ children, icon, to, onClick, className }) {
     if (children && icon) {
         return (
             <>
-                <button className={`${styles.buttonDefault} ${styles.buttonTextIcon} ${className || ""}`} onClick={onClick}>
+                <button type={type} className={`${styles.buttonDefault} ${styles.buttonTextIcon} ${className || ""}`} onClick={onClick} disabled={disabled}>
                     {children}
                     {icon}
                 </button>
@@ -45,7 +45,7 @@ function Button({ children, icon, to, onClick, className }) {
     if (icon) {
         return (
             <>
-                <button className={`${styles.buttonDefault} ${styles.buttonIcon} ${className || ""}`} onClick={onClick}>
+                <button type={type} className={`${styles.buttonDefault} ${styles.buttonIcon} ${className || ""}`} onClick={onClick} disabled={disabled}>
                     {icon}
                 </button>
             </>
@@ -56,7 +56,7 @@ function Button({ children, icon, to, onClick, className }) {
     //Default button
     return (
         <>
-            <button className={`${styles.buttonDefault} ${className || ""}`} onClick={onClick}>
+            <button type={type} className={`${styles.buttonDefault} ${className || ""}`} onClick={onClick} disabled={disabled}>
                 {children}
             </button>
         </>
