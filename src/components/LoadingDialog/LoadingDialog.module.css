@@ -1,0 +1,14 @@
+.dialog {
+    min-width: 16rem;
+    min-height: 16rem;
+    max-width: 26rem;
+    max-height: 26rem;
+    background-color: #ffffff;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 2rem;
+    text-align: center;
+    border-radius: 1rem;
+    padding: 1rem 2rem;
+}

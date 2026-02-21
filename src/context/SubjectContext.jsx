@@ -24,63 +24,32 @@ export function SubjectProvider({ children }) {
         setSubject(data);
     }
 
-    async function addNewSubject(title) {
-        await addSuject({
+    function generateIdSequential() {
+        let latestIndex = Number(localStorage.getItem("latestIndex")) || 0;
+        let newIndex = latestIndex + 1;
+        localStorage.setItem("latestIndex", newIndex);
+
+        return newIndex;
+    }
+
+    async function addNewSubject(title, module_blocks, flashcards) {
+        flashcards ? flashcards.map(fl => fl['id'] = generateIdSequential()) : flashcards = []
+        module_blocks ? module_blocks.map(mb => mb['id'] = generateIdSequential()) : module_blocks = []
+
+        let id = await addSuject({
             "title": title,
             "modules": [
                 {
-                    "id": Date.now() + 1,
-                    "name": "Module 3",
-                    "contents": [
-                        {
-                            "id": 1,
-                            "block_type": "paragraph",
-                            "content": "This is a standalone paragraph, This is for Module Three"
-                        },
-                        {
-                            "id": 2,
-                            "block_type": "paragraph",
-                            "title": "This is a title",
-                            "content": "This is a paragraph with a title or a heading"
-                        },
-                        {
-                            "id": 3,
-                            "block_type": "unorderedList",
-                            "content": [
-                                "Pen",
-                                "Paper",
-                                "Books"
-                            ]
-                        },
-                        {
-                            "id": 4,
-                            "block_type": "orderedList",
-                            "title": "Fruits",
-                            "content": [
-                                "Apple",
-                                "Banana",
-                                "Pineapple"
-                            ]
-                        }
-                    ]
+                    "id": generateIdSequential(),
+                    "name": title,
+                    "contents": module_blocks
                 },
             ],
-            "flashcards": [
-                {
-                    "id": 1,
-                    "front": "THis is the front side",
-                    "back": "This is the back side"
-                },
-                {
-                    "id": 2,
-                    "front": "THis is the front side",
-                    "back": "This is the back side"
-                }
-            ],
-            "notes": "Notes"
+            "flashcards": flashcards,
+            "notes": ""
         });
-
         await loadSubjects();
+        return id;
     }
 
     async function deleteSubject(id) {
