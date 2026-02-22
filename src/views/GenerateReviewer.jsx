@@ -11,6 +11,7 @@ import Button from '../components/Button'
 import LoadingDialog from '../components/LoadingDialog/LoadingDialog'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { SubjectContext } from '../context/SubjectContext'
+import Spinner from '../components/Spinner/Spinner'
 
 function GenerateReviewer() {
 
@@ -20,6 +21,7 @@ function GenerateReviewer() {
     const [file, setFile] = useState(null)
     const { addNewSubject } = useContext(SubjectContext)
     const navigate = useNavigate()
+    const [isServerAwake, setIsServerAwake] = useState(false)
 
     const loadingDialogStyle = {
         position: "absolute",
@@ -37,6 +39,21 @@ function GenerateReviewer() {
                 setIsUploadActive(false)
             }
         }
+
+        // Wake the server if anactive
+        async function wakeServer() {
+            try {
+                let response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/wakeup`);
+                let data = await response.json();
+                if (data.status == "awake") setIsServerAwake(true)
+            } catch (error) {
+                setTimeout(() => {
+                    wakeServer()
+                }, 1000)
+            }
+        }
+
+        wakeServer()
     })
 
     const handleSubmit = async (e) => {
@@ -84,6 +101,19 @@ function GenerateReviewer() {
 
     return (
         <>
+            {
+                isServerAwake ? '' : <div>
+                    <div className='absolute min-w-80 min-h-80 bg-stone-50 z-10 left-1/2 top-1/2 -translate-1/2 rounded-xl default-box-shadow flex flex-col justify-center items-center text-center px-4 py-0.5 gap-y-4'>
+                        <Spinner />
+                        <div>
+                            <p className='font-semibold'>The server is asleep due to inactivity</p>
+                            <p className='text-sm opacity-80'>Please wait while we wake the server...</p>
+                        </div>
+                    </div>
+                    <div className='absolute w-full h-full bg-gray-900 opacity-50'></div>
+                </div>
+            }
+
             <LoadingDialog show={showLoading} message="Your reviewer is being generated, please wait..." style={loadingDialogStyle} className='z-10' />
             {showLoading ? <div className='absolute w-full h-full bg-gray-900 opacity-50'></div> : ''}
 
