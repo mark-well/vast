@@ -7,7 +7,7 @@ function TooltipMain({ className }) {
         <>
             <div className={`${styles.tooltip} default-box-shadow ${className || ''}`}>
                 <ul>
-                    <li><Button>Settings</Button></li>
+                    <li><Button to="/settings">Settings</Button></li>
                     <li><Button to="/about" className="text-[--text-primary]">About</Button></li>
                 </ul>
             </div>

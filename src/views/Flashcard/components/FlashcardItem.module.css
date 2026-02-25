@@ -20,6 +20,7 @@
     backface-visibility: hidden;
     position: absolute;
     border: 1px solid var(--primary-color);
+    background-color: var(--primary-bg);
     border-radius: 1rem;
     display: flex;
     justify-content: center;
@@ -31,7 +32,7 @@
     height: 100%;
     backface-visibility: hidden;
     position: absolute;
-    background-color: beige;
+    background-color: var(--secondary-color);
     transform: rotateY(180deg);
     border: 1px solid white;
     border-radius: 1rem;

@@ -8,6 +8,7 @@ import { SubjectContext } from "../context/SubjectContext";
 import UploadBox from "./UploadBox";
 import { useRef } from "react";
 import LoadingDialog from "./LoadingDialog/LoadingDialog";
+import TextToSpeechControl from "./TTSControl/TextToSpeechControl";
 
 function Tabs({ className, subjectId }) {
     const { getModulesFromSubject, addNewModuleToSubject, addContentToModule, addFlashcards } = useContext(SubjectContext);
@@ -76,7 +77,6 @@ function Tabs({ className, subjectId }) {
 
             // Handle successful fetching
             const data = await response.json();
-            addFlashcards(subjectId, data.flashcards);
             addContentToModule(subjectId, activeTab, data.moduleBlocks);
         } catch (error) {
             console.error("Upload Failed: " + error)
@@ -87,14 +87,15 @@ function Tabs({ className, subjectId }) {
 
     return (
         <>
-            <div className={`flex flex-col grow ${className || ""}`}>
+            <div className={`flex flex-col grow ${className || ""})`}>
+                <TextToSpeechControl />
                 <div className={`${styles.tabsHeader}`}>
                     {
                         modules.map(tab => (
                             <Button key={tab.id} className={`${styles.tabs} ${activeTab === tab.id ? `${styles.activeTab}` : ""}`} onClick={() => { setActiveTab(tab.id) }}>{tab.name}</Button>
                         ))
                     }
-                    <Button className={`${styles.addModuleButton} text-white`} onClick={newModule} icon={<FontAwesomeIcon icon="fa-solid fa-plus" />}></Button>
+                    <Button className={`${styles.addModuleButton} text-[--text-primary]`} onClick={newModule} icon={<FontAwesomeIcon icon="fa-solid fa-plus" />}></Button>
                 </div>
 
                 {/* Tab Container */}
@@ -110,7 +111,7 @@ function Tabs({ className, subjectId }) {
                             <form action="" method='post' required onSubmit={handleSubmit}>
                                 <div className='flex flex-col items-center '>
                                     <UploadBox ref={fileInputRef} />
-                                    <Button className={`${isUploadActive ? 'bg-(--secondary-color) text-white' : 'bg-[hsl(0,0%,85%)]'} p-4 min-w-36 mt-32 rounded-xs`} type="submit" disabled={isUploadActive ? false : true}>Generate</Button>
+                                    <Button className={`${isUploadActive ? 'bg-(--secondary-color) text-[--text-primary]' : 'bg-[hsl(0,0%,85%)]'} p-4 min-w-36 mt-32 rounded-xs`} type="submit" disabled={isUploadActive ? false : true}>Generate</Button>
                                 </div>
                             </form>
                         </div>

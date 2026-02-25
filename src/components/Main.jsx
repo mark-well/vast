@@ -27,7 +27,7 @@ function Main() {
                         }
                     </div>
                     <div className='flex justify-center'>
-                        <Button to="/generate" icon={<FontAwesomeIcon icon="fa-solid fa-plus" />} className="text-white px-4 py-2 bg-(--secondary-color) rounded-xs flex justify-center items-center gap-x-2" >New Reviewer</Button>
+                        <Button to="/generate" icon={<FontAwesomeIcon icon="fa-solid fa-plus" />} className="text-[--text-secondary] px-4 py-2 bg-(--secondary-color) rounded-xs flex justify-center items-center gap-x-2" >New Reviewer</Button>
                         {/* <Button onClick={() => addNewSubject('asoufdgad', [{ "title": "end" }], [{}])} icon={<FontAwesomeIcon icon="fa-solid fa-plus" />} className="text-white min-h-12 px-4 py-2 bg-(--secondary-color) rounded-xs flex justify-center items-center gap-x-2" >New Reviewer</Button> */}
                     </div>
                 </main>
@@ -41,7 +41,7 @@ function Main() {
                 <img src={openBox} className='pb-4' alt="" width="178" height="178" />
                 <h2 className='text-(--text-primary) font-primary'>Collection is Empty</h2>
                 <p className='text-(--text-secondary) font-secondary text-xs'>Click “New Reviewer” to create to add to your collection</p>
-                <Button to="/generate" icon={<FontAwesomeIcon icon="fa-solid fa-plus" />} className="text-white px-4 py-2 mt-16 bg-(--secondary-color) rounded-xs flex justify-center items-center gap-x-2" >New Reviewer</Button>
+                <Button to="/generate" icon={<FontAwesomeIcon icon="fa-solid fa-plus" />} className="text-[--text-secondary] px-4 py-2 mt-16 bg-(--secondary-color) rounded-xs flex justify-center items-center gap-x-2" >New Reviewer</Button>
                 {/* <Button onClick={() => addNewSubject('asoufdgad', [{ "title": "end" }], [{}])} icon={<FontAwesomeIcon icon="fa-solid fa-plus" />} className="text-white min-h-12 px-4 py-2 mt-16 bg-(--secondary-color) rounded-xs flex justify-center items-center gap-x-2" >New Reviewer</Button> */}
             </main>
         </>
