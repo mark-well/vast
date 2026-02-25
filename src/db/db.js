@@ -38,6 +38,33 @@ export async function addModule(subjectId, newModule) {
     await db.put(STORE_NAME, subject);
 }
 
+export async function dbAddContentToModule(subjectId, moduleId, newModuleBlocks) {
+    const db = await dbPromise;
+    const subject = await db.get(STORE_NAME, subjectId);
+    if (!subject) return;
+
+    subject.modules = subject.modules.map(module => {
+        if (module.id != moduleId) return module;
+
+        return {
+            ...module,
+            contents: [...module.contents, ...newModuleBlocks]
+        }
+    })
+
+    await db.put(STORE_NAME, subject)
+}
+
+export async function dbAddFlashcards(subjectId, newFlashcards) {
+    const db = await dbPromise;
+    const subject = await db.get(STORE_NAME, subjectId);
+    if (!subject) return;
+
+    subject.flashcards = subject.flascards || [];
+    subject.flashcards = [...subject.flashcards, ...newFlashcards]
+    await db.put(STORE_NAME, subject);
+}
+
 export async function dbDeleteModule(subjectId, moduleId) {
     const db = await dbPromise;
     const subject = db.get(STORE_NAME, subjectId);
