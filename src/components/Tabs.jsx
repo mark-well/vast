@@ -1,5 +1,5 @@
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import styles from "./Tabs.module.css";
 import Button from "./Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,7 +12,7 @@ import TextToSpeechControl from "./TTSControl/TextToSpeechControl";
 import { TextToSpeechContext } from "./TTSControl/TextToSpeechContext";
 
 function Tabs({ className, subjectId }) {
-    const { getModulesFromSubject, addNewModuleToSubject, addContentToModule, addFlashcards } = useContext(SubjectContext);
+    const { getModulesFromSubject, addNewModuleToSubject, addContentToModule, addFlashcards, searchQuery } = useContext(SubjectContext);
     const modules = getModulesFromSubject(subjectId);
     const [activeTab, setActiveTab] = useState(modules[0].id);
     const fileInputRef = useRef(null)
@@ -27,6 +27,31 @@ function Tabs({ className, subjectId }) {
         left: "50%",
         transform: "translate(-50%, -50%)"
     }
+
+    const filteredContents = useMemo(() => {
+        // 1. Find the specific module for the active tab
+        const activeModule = modules.find(mdl => mdl.id === activeTab);
+
+        // Safety check: if no module is found or no query exists, return all contents of that module
+        if (!activeModule) return [];
+        if (!searchQuery.trim()) return activeModule.contents;
+
+        const query = searchQuery.toLowerCase().trim();
+
+        // 2. Filter the contents of ONLY that active module
+        return activeModule.contents.filter(item => {
+            const titleMatch = item.title?.toLowerCase().includes(query);
+
+            // Handle content being either a string or an array of strings
+            const bodyText = Array.isArray(item.content)
+                ? item.content.join(' ')
+                : (item.content || '');
+
+            const bodyMatch = bodyText.toLowerCase().includes(query);
+
+            return titleMatch || bodyMatch;
+        });
+    }, [modules, activeTab, searchQuery]);
 
     useEffect(() => {
         if (fileInputRef.current == null) return;
@@ -121,7 +146,7 @@ function Tabs({ className, subjectId }) {
 
                     {
 
-                        modules.find(tab => tab.id === activeTab)?.contents.map(block => {
+                        filteredContents.map(block => {
                             if (block.block_type == "paragraph") {
                                 return (
                                     <Block key={block.id} type={block.block_type} title={block.title || ""}>
@@ -140,6 +165,27 @@ function Tabs({ className, subjectId }) {
                             return null
                         })
                     }
+                    {/* {
+
+                        modules.find(tab => tab.id === activeTab)?.contents.map(block => {
+                            if (block.block_type == "paragraph") {
+                                return (
+                                    <Block key={block.id} type={block.block_type} title={block.title || ""}>
+                                        <p>{block.content}</p>
+                                    </Block>
+                                )
+                            } else if (block.block_type == "orderedList") {
+                                return (
+                                    <Block key={block.id} type="orderedList" title={block.title} items={block.content}></Block>
+                                )
+                            } else if (block.block_type == "unorderedList") {
+                                return (
+                                    <Block key={block.id} type="unorderedList" title={block.title} items={block.content}></Block>
+                                )
+                            }
+                            return null
+                        })
+                    } */}
                 </div>
             </div >
         </>

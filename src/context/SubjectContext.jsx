@@ -172,7 +172,8 @@ export function SubjectProvider({ children }) {
             filteredItems,
             setSearchQuery,
             addFlashcards,
-            addContentToModule
+            addContentToModule,
+            searchQuery
         }}>
             {children}
         </SubjectContext.Provider>
