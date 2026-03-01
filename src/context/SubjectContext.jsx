@@ -147,16 +147,16 @@ export function SubjectProvider({ children }) {
     }
 
     async function addFlashcards(subjectId, newFlashcards) {
-        newFlashcards ? newFlashcards.map(fl => fl['id'] = generateIdSequential()) : newFlashcards = []
-        setSubject(prevSubject =>
-            prevSubject.map(subject =>
-                subject.id === subjectId ? {
-                    ...subject, flashcards: [...subject.flashcards, ...newFlashcards]
-                } : subject
-            )
-        );
+        // newFlashcards ? newFlashcards.map(fl => fl['id'] = generateIdSequential()) : newFlashcards = []
+        // setSubject(prevSubject =>
+        //     prevSubject.map(subject =>
+        //         subject.id === subjectId ? {
+        //             ...subject, flashcards: [...subject.flashcards, ...newFlashcards]
+        //         } : subject
+        //     )
+        // );
 
-        await dbAddFlashcards(subjectId, newFlashcards)
+        // await dbAddFlashcards(subjectId, newFlashcards)
     }
 
     return (

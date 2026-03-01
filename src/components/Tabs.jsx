@@ -88,7 +88,7 @@ function Tabs({ className, subjectId }) {
     return (
         <>
             <div className={`flex flex-col grow ${className || ""})`}>
-                <TextToSpeechControl />
+                <TextToSpeechControl contents={modules.find(tab => tab.id === activeTab)?.contents} />
                 <div className={`${styles.tabsHeader}`}>
                     {
                         modules.map(tab => (
