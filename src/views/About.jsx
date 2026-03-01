@@ -18,7 +18,7 @@ function About() {
                     <div className='text-sm font-secondary)'>
                         <h2>VAST</h2>
                         <h2>Version: 1.0</h2>
-                        <h2>Updated on: Feb 18, 2026</h2>
+                        <h2>Updated on: March 1, 2026</h2>
                     </div>
                 </div>
             </div>
