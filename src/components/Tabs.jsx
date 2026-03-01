@@ -9,6 +9,7 @@ import UploadBox from "./UploadBox";
 import { useRef } from "react";
 import LoadingDialog from "./LoadingDialog/LoadingDialog";
 import TextToSpeechControl from "./TTSControl/TextToSpeechControl";
+import { TextToSpeechContext } from "./TTSControl/TextToSpeechContext";
 
 function Tabs({ className, subjectId }) {
     const { getModulesFromSubject, addNewModuleToSubject, addContentToModule, addFlashcards } = useContext(SubjectContext);
@@ -18,6 +19,7 @@ function Tabs({ className, subjectId }) {
     const [file, setFile] = useState(null)
     const [isUploadActive, setIsUploadActive] = useState(false)
     const [showLoading, setShowLoading] = useState(false)
+    const { hideTTS } = useContext(TextToSpeechContext);
 
     const loadingDialogStyle = {
         position: "absolute",
@@ -88,7 +90,7 @@ function Tabs({ className, subjectId }) {
     return (
         <>
             <div className={`flex flex-col grow ${className || ""})`}>
-                <TextToSpeechControl contents={modules.find(tab => tab.id === activeTab)?.contents} />
+                <TextToSpeechControl contents={modules.find(tab => tab.id === activeTab)?.contents} hide={hideTTS} />
                 <div className={`${styles.tabsHeader}`}>
                     {
                         modules.map(tab => (

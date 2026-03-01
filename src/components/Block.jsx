@@ -17,9 +17,14 @@ function Block({ children, type, title, items }) {
         l: getRandomNumber(0, 100, true),
     }
 
+    // const randomBgColor = {
+    //     border: `1.5px solid hsla(${randomColor.h}, ${randomColor.s}%, ${randomColor.l}%, 100%)`,
+    //     backgroundColor: `hsla(${randomColor.h}, ${randomColor.s}%, ${randomColor.l}%, 25%)`
+    // }
+
     const randomBgColor = {
-        border: `1.5px solid hsla(${randomColor.h}, ${randomColor.s}%, ${randomColor.l}%, 100%)`,
-        backgroundColor: `hsla(${randomColor.h}, ${randomColor.s}%, ${randomColor.l}%, 25%)`
+        border: "",
+        backgroundColor: "hsl(2 0% 95%)"
     }
 
     switch (type) {

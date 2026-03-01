@@ -5,6 +5,7 @@ export const TextToSpeechContext = createContext();
 function TextToSpeechProvider({ children }) {
     const [synth] = useState(() => window.speechSynthesis);
     const [voices, setVoices] = useState([]);
+    const [hideTTS, setHideTTS] = useState(true);
 
     // Load voices correctly (important!)
     useEffect(() => {
@@ -97,7 +98,9 @@ function TextToSpeechProvider({ children }) {
                 synth,
                 playText,
                 stop,
-                unStop
+                unStop,
+                hideTTS,
+                setHideTTS
             }}
         >
             {children}

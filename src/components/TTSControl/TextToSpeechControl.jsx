@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useEffect, useState } from "react";
 import { TextToSpeechContext } from "./TextToSpeechContext";
 
-function TextToSpeechControl({ contents }) {
+function TextToSpeechControl({ contents, hide }) {
     const { voices, synth, playText, stop, unStop } = useContext(TextToSpeechContext);
 
     const [playing, setPlaying] = useState(false);
@@ -45,7 +45,7 @@ function TextToSpeechControl({ contents }) {
     };
 
     return (
-        <div className="fixed bg-(--secondary-color) max-w-80 w-4/5 flex justify-center items-center px-4 py-5 gap-x-6 rounded-sm bottom-8 left-1/2 -translate-x-1/2 default-box-shadow">
+        <div className={`${hide && "hidden"} fixed bg-(--secondary-color) max-w-80 w-4/5 flex justify-center items-center px-4 py-5 gap-x-6 rounded-sm bottom-8 left-1/2 -translate-x-1/2 default-box-shadow`}>
 
             {/* Play / Pause */}
             <FontAwesomeIcon
