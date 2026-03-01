@@ -1,0 +1,49 @@
+.themeContainer {
+    width: 100%;
+    padding: 0.5rem 1rem;
+}
+
+.themeContainer h2 {
+    font-weight: 600;
+}
+
+.themes {
+    margin-top: 0.25rem;
+    display: flex;
+    gap: 0.875rem;
+}
+
+.theme {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px 0px hsla(0, 0%, 0%, 15%);
+}
+
+.activeTheme {
+    border: 2px solid white;
+}
+
+.theme:nth-child(1) {
+    background-color: red;
+}
+
+.theme:nth-child(2) {
+    background-color: orange;
+}
+
+.theme:nth-child(3) {
+    background-color: yellow;
+}
+
+.theme:nth-child(4) {
+    background-color: green;
+}
+
+.theme:nth-child(5) {
+    background-color: #0992C2;
+}
+
+.theme:nth-child(6) {
+    background-color: #C47BE4;
+}

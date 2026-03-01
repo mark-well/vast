@@ -1,5 +1,5 @@
 import { createContext, useEffect, useMemo, useState } from "react"
-import { addModule, addSuject, dbDeleteModule, dbDeleteSubject, dbUpdateNotes, getSubjects } from "../db/db";
+import { addModule, addSuject, dbDeleteModule, dbDeleteSubject, dbUpdateNotes, getSubjects, dbAddFlashcards, dbAddContentToModule } from "../db/db";
 
 export const SubjectContext = createContext();
 
@@ -69,26 +69,12 @@ export function SubjectProvider({ children }) {
     }
 
     async function addNewModuleToSubject(id) {
+        // moduleBlocks ? moduleBlocks.map(mb => mb['id'] = generateIdSequential()) : moduleBlocks = []
+        let moduleId = Date.now() + 1826;
         let newModule = {
-            "id": Date.now() + 1826,
-            "name": "Module <Number>",
-            "contents": [
-                {
-                    "id": 2,
-                    "block_type": "paragraph",
-                    "title": "This is a f*cking title",
-                    "content": "This is a paragraph with a title or a heading"
-                },
-                {
-                    "id": 3,
-                    "block_type": "unorderedList",
-                    "content": [
-                        "Pen",
-                        "Paper",
-                        "Books"
-                    ]
-                }
-            ]
+            "id": moduleId,
+            "name": `Module ${moduleId}`,
+            "contents": []
         }
         await addModule(id, newModule);
         setSubject(prevSubject =>
@@ -98,6 +84,34 @@ export function SubjectProvider({ children }) {
                 } : subject
             )
         )
+
+        return moduleId;
+    }
+
+    async function addContentToModule(subjectId, moduleId, newContent) {
+        newContent ? newContent.map(mb => mb['id'] = generateIdSequential()) : newContent = []
+        setSubject(prevSubjects =>
+            prevSubjects.map(subject => {
+                // 1. Find the right subject
+                if (subject.id !== subjectId) return subject;
+
+                return {
+                    ...subject,
+                    modules: subject.modules.map(ml => {
+                        // 2. Find the right module
+                        if (ml.id !== moduleId) return ml;
+
+                        // 3. Append the new content to the existing contents array
+                        return {
+                            ...ml,
+                            contents: [...ml.contents, ...newContent]
+                        };
+                    })
+                };
+            })
+        );
+
+        await dbAddContentToModule(subjectId, moduleId, newContent);
     }
 
     async function deleteModule(subjectId, moduleId) {
@@ -132,6 +146,19 @@ export function SubjectProvider({ children }) {
         await dbUpdateNotes(subjectId, newNotes);
     }
 
+    async function addFlashcards(subjectId, newFlashcards) {
+        // newFlashcards ? newFlashcards.map(fl => fl['id'] = generateIdSequential()) : newFlashcards = []
+        // setSubject(prevSubject =>
+        //     prevSubject.map(subject =>
+        //         subject.id === subjectId ? {
+        //             ...subject, flashcards: [...subject.flashcards, ...newFlashcards]
+        //         } : subject
+        //     )
+        // );
+
+        // await dbAddFlashcards(subjectId, newFlashcards)
+    }
+
     return (
         <SubjectContext.Provider value={{
             subjects,
@@ -143,7 +170,10 @@ export function SubjectProvider({ children }) {
             deleteModule,
             updateNotes,
             filteredItems,
-            setSearchQuery
+            setSearchQuery,
+            addFlashcards,
+            addContentToModule,
+            searchQuery
         }}>
             {children}
         </SubjectContext.Provider>

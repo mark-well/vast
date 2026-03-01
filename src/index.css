@@ -5,9 +5,9 @@
   --font-primary: "Rubik", system-ui, sans-serif;
   --font-secondary: "Nunito", system-ui, sans-serif;
   --primary-color: #96A78D;
-  --secondary-color: #A59D84;
+  --secondary-color: #BCD9A2;
   --primary-bg: hsla(99.23, 12.87%, 60.39%, 25%);
-  --secondary-bg: hsla(45, 15%, 58%, 25%);
+  --secondary-bg: hsla(92, 42%, 74%, 25%);
   --text-primary: #595959;
   --text-secondary: #808080;
 }
@@ -25,8 +25,83 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* padding: 1rem; */
+}
 
+[data-theme='red'] {
+  --font-primary: "Rubik", system-ui, sans-serif;
+  --font-secondary: "Nunito", system-ui, sans-serif;
+  --primary-color: #E36A6A;
+  --secondary-color: #FFF2D0;
+  --primary-bg: hsla(0, 68%, 65%, 25%);
+  --secondary-bg: hsla(43, 100%, 91%, 25%);
+  --text-primary: hsl(0, 0%, 30%);
+  --text-secondary: hsl(0, 0%, 50%);
+}
+
+[data-theme='orange'] {
+  --font-primary: "Rubik", system-ui, sans-serif;
+  --font-secondary: "Nunito", system-ui, sans-serif;
+  --primary-color: #FF9644;
+  --secondary-color: #FFCE99;
+  --primary-bg: hsla(26, 100%, 63%, 25%);
+  --secondary-bg: hsla(31, 100%, 80%, 25%);
+  --text-primary: hsl(0, 0%, 30%);
+  --text-secondary: hsl(0, 0%, 50%);
+}
+
+[data-theme='yellow'] {
+  --font-primary: "Rubik", system-ui, sans-serif;
+  --font-secondary: "Nunito", system-ui, sans-serif;
+  --primary-color: #FCB53B;
+  --secondary-color: #FFE797;
+  --primary-bg: hsla(38, 97%, 61%, 25%);
+  --secondary-bg: hsla(46, 100%, 80%, 25%);
+  --text-primary: hsl(0, 0%, 30%);
+  --text-secondary: hsl(0, 0%, 50%);
+}
+
+[data-theme='green'] {
+  --font-primary: "Rubik", system-ui, sans-serif;
+  --font-secondary: "Nunito", system-ui, sans-serif;
+  --primary-color: #96A78D;
+  --secondary-color: #BCD9A2;
+  --primary-bg: hsla(99.23, 12.87%, 60.39%, 25%);
+  --secondary-bg: hsla(92, 42%, 74%, 25%);
+  --text-primary: #595959;
+  --text-secondary: #808080;
+}
+
+[data-theme='blue'] {
+  --font-primary: "Rubik", system-ui, sans-serif;
+  --font-secondary: "Nunito", system-ui, sans-serif;
+  --primary-color: #0B2D72;
+  --secondary-color: #0AC4E0;
+  --primary-bg: hsla(220, 82%, 25%, 25%);
+  --secondary-bg: hsla(188, 91%, 46%, 25%);
+  --text-primary: #595959;
+  --text-secondary: #808080;
+}
+
+[data-theme='purple'] {
+  --font-primary: "Rubik", system-ui, sans-serif;
+  --font-secondary: "Nunito", system-ui, sans-serif;
+  --primary-color: #7132CA;
+  --secondary-color: #F1E9E9;
+  --primary-bg: hsla(265, 60%, 49%, 25%);
+  --secondary-bg: hsla(0, 22%, 93%, 25%);
+  --text-primary: #595959;
+  --text-secondary: #808080;
+}
+
+[data-theme='dark'] {
+  --font-primary: "Rubik", system-ui, sans-serif;
+  --font-secondary: "Nunito", system-ui, sans-serif;
+  --primary-color: hsl(0, 0%, 30%);
+  --secondary-color: hsl(0, 0%, 80%);
+  --primary-bg: hsla(0, 0%, 70%);
+  --secondary-bg: hsla(0, 0%, 90%);
+  --text-primary: #595959;
+  --text-secondary: #808080;
 }
 
 .default-box-shadow {

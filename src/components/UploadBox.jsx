@@ -7,7 +7,7 @@ function UploadBox({ ref }) {
                     <h2 className='text-sm text-center'>Upload your material here to start generating reviewer.</h2>
                     <p className='text-xs text-(--text-secondary) text-center'>Note: only pdf are currently supported.</p>
                 </div>
-                <input ref={ref} className='text-sm bg-(--secondary-color) p-2.5 text-white rounded-xs max-w-48' type='file' name="filename" />
+                <input ref={ref} className='text-sm bg-(--secondary-color) p-2.5 text-[--text-primary] rounded-xs max-w-48' type='file' name="filename" />
             </div>
         </>
     );

@@ -76,7 +76,7 @@ function Header({ type, title }) {
                             <Button onClick={navigateBack} icon={<FontAwesomeIcon icon="fa-solid fa-arrow-left-long" size='xl' />}></Button>
                             <h1 className={`text-xl ${isSearchBarHidden ? '' : 'hidden'}`}>{title}</h1>
                         </div>
-                        <input type="text" placeholder='Search' className={`w-full px-4 ${isSearchBarHidden ? 'hidden' : ''} bg-white h-8 rounded-sm text-(--text-primary) text-base outline-none`} />
+                        <input type="text" onChange={(e) => setSearchQuery(e.target.value)} placeholder='Search' className={`w-full px-4 ${isSearchBarHidden ? 'hidden' : ''} bg-white h-8 rounded-sm text-(--text-primary) text-base outline-none`} />
                         <div className='flex '>
                             <Button onClick={toggleSearchBar} className="cursor-pointer" icon={<FontAwesomeIcon icon="fa-solid fa-magnifying-glass" size='xl' />} />
                             <Button onClick={toggleTooltip} className="cursor-pointer" icon={<FontAwesomeIcon icon="fa-solid fa-ellipsis-vertical" size='xl' />} />

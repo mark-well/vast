@@ -6,12 +6,12 @@
 }
 
 .tabs {
-    background-color: hsla(259, 53%, 76%, 0.2);
+    background-color: var(--primary-bg);
     padding: 6px 1rem;
     font-family: var(--font-secondary);
     border-radius: 2px;
     font-size: small;
-    color: var(--secondary-color);
+    color: var(--text-secondary);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -29,8 +29,8 @@
 }
 
 .activeTab {
-    background-color: var(--secondary-color);
-    color: white;
+    background-color: var(--secondary-bg);
+    color: var(--text-primary);
 }
 
 .tabContentContainer {

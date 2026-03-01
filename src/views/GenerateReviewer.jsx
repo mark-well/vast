@@ -125,7 +125,7 @@ function GenerateReviewer() {
                 <div className='flex flex-col items-center '>
                     <h1 className='text-(--text-primary) text-2xl font-bold text-center mt-16'>Generate a new reviewer</h1>
                     <UploadBox ref={fileInputRef} />
-                    <Button className={`${isUploadActive ? 'bg-(--secondary-color) text-white' : 'bg-[hsl(0,0%,85%)]'} p-4 min-w-36 mt-32 rounded-xs`} type="submit" disabled={isUploadActive ? false : true}>Generate</Button>
+                    <Button className={`${isUploadActive ? 'bg-(--secondary-color) text-[--text-primary]' : 'bg-[hsl(0,0%,85%)]'} p-4 min-w-36 mt-32 rounded-xs`} type="submit" disabled={isUploadActive ? false : true}>Generate</Button>
                 </div>
             </form>
         </>
