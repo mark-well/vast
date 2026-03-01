@@ -155,11 +155,11 @@ function Tabs({ className, subjectId }) {
                                 )
                             } else if (block.block_type == "ordered_list") {
                                 return (
-                                    <Block key={block.id} type="ordered_list" title={block.title} items={block.content}></Block>
+                                    <Block key={block.id} type="orderedList" title={block.title} items={block.content}></Block>
                                 )
                             } else if (block.block_type == "unordered_list") {
                                 return (
-                                    <Block key={block.id} type="unordered_list" title={block.title} items={block.content}></Block>
+                                    <Block key={block.id} type="unorderedList" title={block.title} items={block.content}></Block>
                                 )
                             }
                             return null
