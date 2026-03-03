@@ -69,7 +69,7 @@ function TextToSpeechControl({ contents, hide }) {
                 id="voice-options"
                 value={selectedVoiceIndex}
                 onChange={handleSelectChange}
-                className="overflow-auto px-2 py-1 rounded"
+                className="overflow-auto px-2 py-1 rounded max-w-2/5"
             >
                 {voices?.map((voice, index) => (
                     <option key={voice.name + index} value={index}>

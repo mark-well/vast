@@ -133,7 +133,7 @@ function Tabs({ className, subjectId }) {
                     {modules.find(tab => tab.id === activeTab)?.contents == 0 &&
                         <div>
                             <LoadingDialog show={showLoading} message="Your reviewer is being generated, please wait..." style={loadingDialogStyle} className='z-10' />
-                            {showLoading ? <div className='absolute w-full h-full bg-gray-900 opacity-50'></div> : ''}
+                            {showLoading ? <div className='absolute w-full h-full bg-gray-900 opacity-50 left-0 top-0'></div> : ''}
 
                             <form action="" method='post' required onSubmit={handleSubmit}>
                                 <div className='flex flex-col items-center '>
