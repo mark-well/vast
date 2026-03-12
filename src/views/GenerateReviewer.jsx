@@ -53,7 +53,9 @@ function GenerateReviewer() {
             }
         }
 
-        wakeServer()
+        if (!isServerAwake) {
+            wakeServer()
+        }
     })
 
     const handleSubmit = async (e) => {
@@ -70,27 +72,28 @@ function GenerateReviewer() {
         formData.append('file', file);
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/generate`, {
-                method: 'post',
-                body: formData
-            })
+            // const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/generate`, {
+            //     method: 'post',
+            //     body: formData
+            // })
 
-            // Handle BAD responses
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.log(response.status)
-                switch (response.status) {
-                    case 400:
-                        alert("File must be a PDF")
-                        break
-                }
+            // // Handle BAD responses
+            // if (!response.ok) {
+            //     const errorData = await response.json();
+            //     console.log(response.status)
+            //     switch (response.status) {
+            //         case 400:
+            //             alert("File must be a PDF")
+            //             break
+            //     }
 
-                throw new Error(errorData.detail || "Something went wrong");
-            }
+            //     throw new Error(errorData.detail || "Something went wrong");
+            // }
 
-            // Handle successful fetching
-            const data = await response.json();
-            let id = await addNewSubject(data.fileName, data.moduleBlocks, data.flashcards);
+            // // Handle successful fetching
+            // const data = await response.json();
+            // let id = await addNewSubject(data.fileName, data.moduleBlocks, data.flashcards);
+            let id = await addNewSubject("New Module", [], []);
             navigate(`/subject/${id}`);
         } catch (error) {
             console.error("Upload Failed: " + error)
