@@ -218,7 +218,7 @@ function Tabs({ className, subjectId }) {
                         </div>
                     }
 
-                    {(flashcards.length != 0 && showFlashcardLoading) && <Block type="loading_flashcards"></Block>}
+                    {(flashcards.length == 0 && showFlashcardLoading) && <Block type="loading_flashcards"></Block>}
 
                     {(modules.find(tab => tab.id === activeTab)?.contents == 0 && !showLoadingBlock) &&
                         <div>

@@ -1,5 +1,5 @@
 import { createContext, useEffect, useMemo, useState } from "react"
-import { addModule, addSuject, dbDeleteModule, dbDeleteSubject, dbUpdateNotes, getSubjects, dbAddFlashcards, dbAddContentToModule, dbAddSingleContentToModule, dbAddSingleFlashcard } from "../db/db";
+import { addModule, addSuject, dbDeleteModule, dbDeleteSubject, dbUpdateNotes, getSubjects, dbAddFlashcards, dbAddContentToModule, dbAddSingleContentToModule, dbAddSingleFlashcard, dbRenameModule, dbRenameSubject } from "../db/db";
 
 export const SubjectContext = createContext();
 
@@ -76,6 +76,8 @@ export function SubjectProvider({ children }) {
         setSubject(prev => prev.map(subject =>
             subject.id == id ? { ...subject, title: newName } : subject
         ));
+
+        dbRenameSubject(id, newName);
     }
 
     const renameModule = (subjectId, moduleId, newName) => {
@@ -99,6 +101,8 @@ export function SubjectProvider({ children }) {
                 };
             })
         );
+
+        dbRenameModule(subjectId, moduleId, newName);
     }
 
     async function addNewModuleToSubject(id) {

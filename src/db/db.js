@@ -109,3 +109,29 @@ export async function dbUpdateNotes(subjectId, notes) {
     let updated = { ...subject, notes };
     await db.put(STORE_NAME, updated);
 }
+
+export async function dbRenameSubject(subjectId, newName) {
+    const db = await dbPromise;
+    const subject = await db.get(STORE_NAME, subjectId);
+    if (!subject) return;
+
+    let updated = { ...subject, title: newName };
+    await db.put(STORE_NAME, updated);
+}
+
+export async function dbRenameModule(subjectId, moduleId, newName) {
+    const db = await dbPromise;
+    const subject = await db.get(STORE_NAME, subjectId);
+    if (!subject) return;
+
+    subject.modules = subject.modules.map(module => {
+        if (module.id != moduleId) return module;
+
+        return {
+            ...module,
+            name: newName
+        }
+    })
+
+    await db.put(STORE_NAME, subject)
+}
