@@ -55,6 +55,23 @@ export async function dbAddContentToModule(subjectId, moduleId, newModuleBlocks)
     await db.put(STORE_NAME, subject)
 }
 
+export async function dbAddSingleContentToModule(subjectId, moduleId, newContent) {
+    const db = await dbPromise;
+    const subject = await db.get(STORE_NAME, subjectId);
+    if (!subject) return;
+
+    subject.modules = subject.modules.map(module => {
+        if (module.id != moduleId) return module;
+
+        return {
+            ...module,
+            contents: [...module.contents, newContent]
+        }
+    })
+
+    await db.put(STORE_NAME, subject)
+}
+
 export async function dbAddFlashcards(subjectId, newFlashcards) {
     const db = await dbPromise;
     const subject = await db.get(STORE_NAME, subjectId);
@@ -62,6 +79,16 @@ export async function dbAddFlashcards(subjectId, newFlashcards) {
 
     subject.flashcards = subject.flascards || [];
     subject.flashcards = [...subject.flashcards, ...newFlashcards]
+    await db.put(STORE_NAME, subject);
+}
+
+export async function dbAddSingleFlashcard(subjectId, newFlashcard) {
+    const db = await dbPromise;
+    const subject = await db.get(STORE_NAME, subjectId);
+    if (!subject) return;
+
+    subject.flashcards = subject.flascards || [];
+    subject.flashcards = [...subject.flashcards, newFlashcard]
     await db.put(STORE_NAME, subject);
 }
 
@@ -81,4 +108,30 @@ export async function dbUpdateNotes(subjectId, notes) {
 
     let updated = { ...subject, notes };
     await db.put(STORE_NAME, updated);
+}
+
+export async function dbRenameSubject(subjectId, newName) {
+    const db = await dbPromise;
+    const subject = await db.get(STORE_NAME, subjectId);
+    if (!subject) return;
+
+    let updated = { ...subject, title: newName };
+    await db.put(STORE_NAME, updated);
+}
+
+export async function dbRenameModule(subjectId, moduleId, newName) {
+    const db = await dbPromise;
+    const subject = await db.get(STORE_NAME, subjectId);
+    if (!subject) return;
+
+    subject.modules = subject.modules.map(module => {
+        if (module.id != moduleId) return module;
+
+        return {
+            ...module,
+            name: newName
+        }
+    })
+
+    await db.put(STORE_NAME, subject)
 }

@@ -1,5 +1,6 @@
 
 import styles from "./Block.module.css"
+import LoadingDialog from "./LoadingDialog/LoadingDialog";
 
 function getRandomNumber(min, max, isInteger) {
     if (isInteger) {
@@ -68,6 +69,21 @@ function Block({ children, type, title, items }) {
                     </div >
                 </>
             )
+
+        case "loading":
+            return (
+                <>
+                    <LoadingDialog className={`${styles.block}`} style={{ 'width': '100%', 'maxWidth': 'none' }} message="More content is being generated, please be patient."></LoadingDialog>
+                </>
+            )
+
+        case "loading_flashcards":
+            return (
+                <>
+                    <LoadingDialog className={`${styles.block}`} style={{ 'width': '100%', 'maxWidth': 'none', 'minHeight': '184px', 'backgroundColor': 'hsla(50 100% 64.3% / 0.5)' }} message="Your flashcards is being generated, please be patient."></LoadingDialog>
+                </>
+            )
+
         default:
             return (
                 <>
