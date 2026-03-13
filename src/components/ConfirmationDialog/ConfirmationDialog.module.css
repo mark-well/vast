@@ -1,0 +1,47 @@
+.container {
+    min-width: 290px;
+    max-width: 450px;
+    height: 260px;
+    background-color: hsl(0, 0%, 98%);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid var(--secondary-color);
+    border-radius: 6px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.messageContainer {
+    flex-grow: 1;
+}
+
+.messageContainer>h2 {
+    font-weight: 600;
+}
+
+.messageContainer>p {
+    color: var(--text-secondary);
+}
+
+.buttonsContainer {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.buttonsContainer>Button {
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+}
+
+.buttonsContainer>.buttonPositive {
+    background-color: hsl(140, 73%, 78%);
+}
+
+.buttonsContainer>.buttonNegative {
+    background-color: hsl(0, 95%, 78%);
+}

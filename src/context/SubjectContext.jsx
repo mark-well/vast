@@ -53,11 +53,14 @@ export function SubjectProvider({ children }) {
     }
 
     async function deleteSubject(id) {
+        if (!getSubjectById(id)) return 0;
+
         setSubject(prev =>
             prev.filter(subject => subject.id !== id)
         );
 
         await dbDeleteSubject(id);
+        return 1;
     }
 
     const getSubjectById = (id) => {

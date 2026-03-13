@@ -8,27 +8,52 @@ library.add(fas, far, fab)
 import openBox from "../assets/open-box.png";
 import Button from '../components/Button'
 import SubjectItem from './SubjectItem'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { SubjectContext } from '../context/SubjectContext'
 import { useNavigate } from 'react-router-dom'
+import ConfirmationDialog from './ConfirmationDialog/ConfirmationDialog'
 
 function Main() {
     const navigate = useNavigate();
-    const { subjects, addNewSubject, filteredItems } = useContext(SubjectContext);
+    const { subjects, addNewSubject, filteredItems, deleteSubject } = useContext(SubjectContext);
+    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+    const [subjectToDelete, setSubjectToDelete] = useState(0);
 
     const handleGenerate = async () => {
         let id = await addNewSubject("New Module", [], []);
         navigate(`/subject/${id}`);
     }
 
+    const handleDelete = async (e, id) => {
+        e.stopPropagation();
+        setSubjectToDelete(id);
+        setShowDeleteConfirmation(true);
+    }
+
+    const confirmDeleteSubject = async () => {
+        const deleted = await deleteSubject(subjectToDelete);
+        setSubjectToDelete(0);
+
+        //If deletion is success
+        if (deleted == 1) {
+            setShowDeleteConfirmation(false);
+        }
+    }
+
+    const cancelDeleteSubject = () => {
+        setShowDeleteConfirmation(false);
+        setSubjectToDelete(0);
+    }
+
     if (!subjects.length == 0) {
         return (
             <>
+                {showDeleteConfirmation && <ConfirmationDialog onPositive={confirmDeleteSubject} onNegative={cancelDeleteSubject} title="Delete Subject" message="Are you sure you want to delete this subject? This action cannot be undone." />}
                 <main className='main grow flex flex-col gap-y-8'>
                     <div className='subject-list'>
                         {
                             filteredItems.map(subject => (
-                                <SubjectItem id={subject.id} key={subject.id} title={subject.title} />
+                                <SubjectItem id={subject.id} key={subject.id} title={subject.title} onDelete={(e) => handleDelete(e, subject.id)} />
                             ))
                         }
                     </div>

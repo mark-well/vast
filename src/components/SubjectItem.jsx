@@ -7,12 +7,9 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import Button from "./Button";
-import { useContext } from "react";
-import { SubjectContext } from "../context/SubjectContext";
 library.add(fas, far, fab)
 
-function SubjectItem({ id, title }) {
-    const { deleteSubject } = useContext(SubjectContext);
+function SubjectItem({ id, title, onDelete }) {
     const navigate = useNavigate();
 
     const openSubject = () => {
@@ -28,10 +25,7 @@ function SubjectItem({ id, title }) {
         <>
             <div className={styles.subjectItem} onClick={openSubject}>
                 <p>{title}</p>
-                <Button className="text-[--text-primary] cursor-pointer" onClick={async (e) => {
-                    e.stopPropagation();
-                    await deleteSubject(id);
-                }} icon={<FontAwesomeIcon icon="fa-solid fa-trash" />}></Button>
+                <Button className="text-[--text-primary] cursor-pointer" onClick={onDelete} icon={<FontAwesomeIcon icon="fa-solid fa-trash" />}></Button>
             </div>
         </>
     )
