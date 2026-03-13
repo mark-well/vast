@@ -10,6 +10,8 @@
   --secondary-bg: hsla(92, 42%, 74%, 25%);
   --text-primary: #595959;
   --text-secondary: #808080;
+  --action-positive: hsl(130, 50%, 60%);
+  --action-negative: hsl(0, 80%, 60%);
 }
 
 :root {
@@ -36,6 +38,7 @@
   --secondary-bg: hsla(43, 100%, 91%, 25%);
   --text-primary: hsl(0, 0%, 30%);
   --text-secondary: hsl(0, 0%, 50%);
+  --color: hsl(129, 100%, 60%);
 }
 
 [data-theme='orange'] {

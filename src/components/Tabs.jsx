@@ -11,6 +11,7 @@ import LoadingDialog from "./LoadingDialog/LoadingDialog";
 import TextToSpeechControl from "./TTSControl/TextToSpeechControl";
 import { TextToSpeechContext } from "./TTSControl/TextToSpeechContext";
 import Spinner from "./Spinner/Spinner";
+import AlertDialog from "./AlertDialog/AlertDialog";
 
 function Tabs({ className, subjectId }) {
     const { getSubjectById, getModulesFromSubject, addNewModuleToSubject, addSingleContentToModule, addContentToModule, addSingleFlashcard, getFlashcardsFromSubject, searchQuery, renameModule, renameSubject } = useContext(SubjectContext);
@@ -26,6 +27,7 @@ function Tabs({ className, subjectId }) {
     const [showFlashcardLoading, setShowFlascardLoading] = useState(false);
     const [isServerAwake, setIsServerAwake] = useState(false);
     const [showServerLoading, setShowServerLoading] = useState(false);
+    const [showFileError, setShowFileError] = useState(false);
 
     const loadingDialogStyle = {
         position: "absolute",
@@ -107,6 +109,12 @@ function Tabs({ className, subjectId }) {
             return
         }
 
+        // Check if the file is a PDF
+        if (fileInputRef.current.files[0].type != "application/pdf") {
+            setShowFileError(true);
+            return;
+        }
+
         setShowLoadingBlock(true);
         setShowFlascardLoading(true);
         const formData = new FormData();
@@ -123,6 +131,16 @@ function Tabs({ className, subjectId }) {
                     body: formData
                 });
 
+                // Handle HTTP error
+                if (!response.ok) {
+                    console.log(await response.json())
+                    setShowLoadingBlock(false);
+                    setShowFlascardLoading(false);
+                    setIsUploadActive(false);
+                    return;
+                }
+
+                // Success HTTP request
                 const reader = response.body.getReader();
                 const decoder = new TextDecoder();
                 let buffer = "";
@@ -189,9 +207,16 @@ function Tabs({ className, subjectId }) {
         ]);
     }
 
+
+    const handleCloseAlert = () => {
+        setShowFileError(false);
+    }
+
     return (
         <>
             <div className={`flex flex-col grow ${className || ""})`}>
+                {showFileError && <AlertDialog message='File must be a PDF.' type='error' icon={<FontAwesomeIcon icon="fa-regular fa-circle-xmark" />} onAction={handleCloseAlert} />}
+
                 <TextToSpeechControl contents={modules.find(tab => tab.id === activeTab)?.contents} hide={hideTTS} />
                 <div className={`${styles.tabsHeader}`}>
                     {
