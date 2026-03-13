@@ -2,37 +2,12 @@
 import styles from "./Block.module.css"
 import LoadingDialog from "./LoadingDialog/LoadingDialog";
 
-function getRandomNumber(min, max, isInteger) {
-    if (isInteger) {
-        return Math.floor(Math.random() * (max - min) + min);
-    } else {
-        return Math.random() * (max - min) + min;
-    }
-}
-
 function Block({ children, type, title, items }) {
-
-    let randomColor = {
-        h: getRandomNumber(0, 100, true),
-        s: getRandomNumber(0, 100, true),
-        l: getRandomNumber(0, 100, true),
-    }
-
-    // const randomBgColor = {
-    //     border: `1.5px solid hsla(${randomColor.h}, ${randomColor.s}%, ${randomColor.l}%, 100%)`,
-    //     backgroundColor: `hsla(${randomColor.h}, ${randomColor.s}%, ${randomColor.l}%, 25%)`
-    // }
-
-    const randomBgColor = {
-        border: "",
-        backgroundColor: "hsl(2 0% 95%)"
-    }
-
     switch (type) {
         case "paragraph":
             return (
                 <>
-                    <div className={`${styles.block} ${styles.paragraphBlock}`} style={randomBgColor}>
+                    <div className={`${styles.block} ${styles.paragraphBlock}`}>
                         {title ? <h2 className={`${styles.title}`}>{title}</h2> : null}
                         {children}
                     </div>
@@ -42,7 +17,7 @@ function Block({ children, type, title, items }) {
         case "orderedList":
             return (
                 <>
-                    <div className={`${styles.block} ${styles.listBlock}`} style={randomBgColor}>
+                    <div className={`${styles.block} ${styles.listBlock}`}>
                         {title ? <h2 className={`${styles.title}`}>{title}</h2> : null}
                         <ol>
                             {
@@ -57,7 +32,7 @@ function Block({ children, type, title, items }) {
         case "unorderedList":
             return (
                 <>
-                    <div className={`${styles.block} ${styles.listBlock}`} style={randomBgColor}>
+                    <div className={`${styles.block} ${styles.listBlock}`}>
                         {title ? <h2 className={`${styles.title}`}>{title}</h2> : null}
                         <ul>
                             {
@@ -87,7 +62,7 @@ function Block({ children, type, title, items }) {
         default:
             return (
                 <>
-                    <div className={`${styles.block}`} style={randomBgColor}>
+                    <div className={`${styles.block}`}>
                         Content
                     </div>
                 </>
