@@ -72,12 +72,12 @@ function Header({ type, title }) {
             return (
                 <>
                     <header className="bg-(--primary-color) text-white min-h-12 w-full gap-x-4 py-2 px-4 flex items-center justify-between">
-                        <div className='flex items-center font-semibold'>
+                        <div className={`flex items-center font-semibold ${isSearchBarHidden ? "min-w-44" : ""}`}>
                             <Button onClick={navigateBack} icon={<FontAwesomeIcon icon="fa-solid fa-arrow-left-long" size='xl' />}></Button>
-                            <h1 className={`text-xl ${isSearchBarHidden ? '' : 'hidden'}`}>{title}</h1>
+                            <h1 className={`text-lg truncate ${isSearchBarHidden ? '' : 'hidden'}`}>{title}</h1>
                         </div>
                         <input type="text" onChange={(e) => setSearchQuery(e.target.value)} placeholder='Search' className={`w-full px-4 ${isSearchBarHidden ? 'hidden' : ''} bg-white h-8 rounded-sm text-(--text-primary) text-base outline-none`} />
-                        <div className='flex '>
+                        <div className='flex'>
                             <Button onClick={toggleSearchBar} className="cursor-pointer" icon={<FontAwesomeIcon icon="fa-solid fa-magnifying-glass" size='xl' />} />
                             <Button onClick={toggleTooltip} className="cursor-pointer" icon={<FontAwesomeIcon icon="fa-solid fa-ellipsis-vertical" size='xl' />} />
                         </div>

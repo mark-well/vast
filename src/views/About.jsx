@@ -9,10 +9,9 @@ function About() {
                 <div className='w-full grow px-4 flex flex-col gap-y-3.5'>
                     <div className='flex flex-col items-center gap-y-4 border-b-gray-700 border-b py-4'>
                         <h1 className='font-bold text-gray-800'>VAST: A Smart Study Guide App</h1>
-                        <p className='text-sm text-center min-w-96 font-secondary)'>
+                        <p className='text-sm text-center min-w-64 font-secondary)'>
                             VAST is a progressive web application designed to assist students in preparing for exams by transforming raw course materials into structured, interactive study guides.
-                            <br></br>
-                            VAST supports diverse learning styles and promotes efficient, inclusive, and accessible study experiences.</p>
+                        </p>
                     </div>
 
                     <div className='text-sm font-secondary)'>
