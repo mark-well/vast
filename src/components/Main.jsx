@@ -20,7 +20,7 @@ function Main() {
     const [subjectToDelete, setSubjectToDelete] = useState(0);
 
     const handleGenerate = async () => {
-        let id = await addNewSubject("New Module", [], []);
+        let id = await addNewSubject("New Subject", [], []);
         navigate(`/subject/${id}`);
     }
 
