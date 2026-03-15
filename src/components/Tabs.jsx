@@ -120,7 +120,7 @@ function Tabs({ className, subjectId }) {
         const formData = new FormData();
         formData.append('file', file);
         renameModule(subjectId, activeTab, file.name);
-        if (getSubjectById(subjectId).title == "New Module") {
+        if (getSubjectById(subjectId).title == "New Subject") {
             renameSubject(subjectId, file.name);
         }
 
