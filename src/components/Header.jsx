@@ -85,7 +85,7 @@ function Header({ type, title }) {
                             <Button onClick={toggleTooltip} className="cursor-pointer" icon={<FontAwesomeIcon icon="fa-solid fa-ellipsis-vertical" size='xl' />} />
                         </div>
                     </header>
-                    <TooltipSubject className={`${isTooltipHidden ? 'hidden' : ''}`}></TooltipSubject>
+                    <TooltipSubject className={`${isTooltipHidden ? 'hidden' : ''} z-2`}></TooltipSubject>
                     <div className={`${isTooltipHidden ? 'hidden' : ''} backdrop absolute w-full h-full left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-1`} onClick={toggleTooltip}></div>
                 </>
             )
