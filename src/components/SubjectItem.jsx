@@ -9,7 +9,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 import Button from "./Button";
 library.add(fas, far, fab)
 
-function SubjectItem({ id, title, onDelete }) {
+function SubjectItem({ id, title, onDelete, onRename }) {
     const navigate = useNavigate();
 
     const openSubject = () => {
@@ -23,9 +23,12 @@ function SubjectItem({ id, title, onDelete }) {
 
     return (
         <>
-            <div className={styles.subjectItem} onClick={openSubject}>
-                <p>{title}</p>
-                <Button className="text-[--text-primary] cursor-pointer" onClick={onDelete} icon={<FontAwesomeIcon icon="fa-solid fa-trash" />}></Button>
+            <div className={`${styles.subjectItem} gap-x-4`} onClick={openSubject}>
+                <p className="truncate">{title}</p>
+                <div className="flex flex-row">
+                    <Button className="text-[--text-primary] cursor-pointer" onClick={onRename} icon={<FontAwesomeIcon icon="fa-solid fa-pen" size="md" />}></Button>
+                    <Button className="text-[--text-primary] cursor-pointer" onClick={onDelete} icon={<FontAwesomeIcon icon="fa-solid fa-trash" size="md" />}></Button>
+                </div>
             </div>
         </>
     )

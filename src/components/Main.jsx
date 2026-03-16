@@ -8,16 +8,19 @@ library.add(fas, far, fab)
 import openBox from "../assets/open-box.png";
 import Button from '../components/Button'
 import SubjectItem from './SubjectItem'
-import { useContext, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { SubjectContext } from '../context/SubjectContext'
 import { useNavigate } from 'react-router-dom'
 import ConfirmationDialog from './ConfirmationDialog/ConfirmationDialog'
 
 function Main() {
     const navigate = useNavigate();
-    const { subjects, addNewSubject, filteredItems, deleteSubject } = useContext(SubjectContext);
+    const { subjects, addNewSubject, filteredItems, deleteSubject, renameSubject } = useContext(SubjectContext);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
     const [subjectToDelete, setSubjectToDelete] = useState(0);
+    const [renameInputVisible, setRenameInputVisible] = useState(false);
+    const renameInput = useRef("");
+    const [subjectToRename, setSubjectToRename] = useState(0);
 
     const handleGenerate = async () => {
         let id = await addNewSubject("New Subject", [], []);
@@ -28,6 +31,23 @@ function Main() {
         e.stopPropagation();
         setSubjectToDelete(id);
         setShowDeleteConfirmation(true);
+    }
+
+    const handleRename = (e, id) => {
+        e.stopPropagation();
+        setRenameInputVisible(true);
+        setSubjectToRename(id);
+    }
+
+    const validateRename = () => {
+        let input = renameInput.current.value;
+        if (input == "") {
+            alert("Input cannot be empty");
+            return;
+        }
+
+        renameSubject(subjectToRename, input);
+        setRenameInputVisible(false);
     }
 
     const confirmDeleteSubject = async () => {
@@ -49,11 +69,27 @@ function Main() {
         return (
             <>
                 {showDeleteConfirmation && <ConfirmationDialog onPositive={confirmDeleteSubject} onNegative={cancelDeleteSubject} title="Delete Subject" message="Are you sure you want to delete this subject? This action cannot be undone." />}
+                {renameInputVisible && <div className={`rename-input flex flex-col z-2 absolute bg-white w-4/5 h-64 max-w-96 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md`}>
+                    <div className='w-full flex px-4 py-2 justify-between items-center'>
+                        <h2 className='font-medium truncate'>Rename this subject</h2>
+                        <Button icon={<FontAwesomeIcon icon="fa-solid fa-x" size='md' />} onClick={() => setRenameInputVisible(false)}></Button>
+                    </div>
+                    <div className='w-full h-0.5 bg-gray-300'></div>
+                    <div className='grow flex flex-col p-4 justify-between items-center w-full'>
+                        <div className='flex flex-col items-center w-full'>
+                            <label htmlFor="rename-input">Enter name:</label>
+                            <input ref={renameInput} type="text" id="rename-input" className='border w-10/12 h-8 px-2 outline-none' />
+                        </div>
+                        <Button className={`bg-(--secondary-color) px-8 py-2 rounded-sm default-box-shadow`} onClick={validateRename}>Confirm</Button>
+                    </div>
+                </div>}
+                {renameInputVisible && <div className='z-1 bg-black opacity-30 absolute w-full h-full'></div>}
+
                 <main className='main grow flex flex-col gap-y-8'>
                     <div className='subject-list'>
                         {
                             filteredItems.map(subject => (
-                                <SubjectItem id={subject.id} key={subject.id} title={subject.title} onDelete={(e) => handleDelete(e, subject.id)} />
+                                <SubjectItem id={subject.id} key={subject.id} title={subject.title} onDelete={(e) => handleDelete(e, subject.id)} onRename={(e) => handleRename(e, subject.id)} />
                             ))
                         }
                     </div>
