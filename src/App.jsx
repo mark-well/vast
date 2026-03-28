@@ -1,5 +1,6 @@
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Analytics } from "@vercel/analytics/next"
 
 import Home from './views/Home'
 import Subject from './views/Subject'
@@ -23,6 +24,7 @@ function App() {
           <Route path='/settings' element={<Settings />} />
         </Routes>
       </BrowserRouter>
+      <Analytics />
     </>
   )
 }
